@@ -31,9 +31,11 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
   In counter1, count is inside the function, with another function inside of it, while in counter2 count is global scoped and the function is sinle-layer.
   
   2. Which of the two uses a closure? How can you tell?
+  Both use closure - both counter (inside counterMaker) and counter2 reference count, which is outside themselves.
   
-  3. In what scenario would the counter1 code be preferable? In what scenario would 
-     counter2 be better?  
+  3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+  Counter 1 is better if you need to make multiple counters that have separate counts. Counter 2 is better if you want multiple counters to share the same count. 
+
 */
 
 // counter1 code
@@ -63,10 +65,11 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+function inning(){
+  let score = Math.floor(Math.random() * 3);
+  return score
 }
-
+//console.log(inning());
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
 Use the finalScore function below to do the following:
@@ -82,9 +85,15 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*code Here*/){
-  /*Code Here*/
+function finalScore(inningCB, num){
+  let teams = {Home: 0, Away: 0}
+  for (let i = 0; i < num; i++){
+    teams.Home = teams.Home + inningCB();
+    teams.Away = teams.Away + inningCB();
+  }
+  return teams;
 }
+//console.log(finalScore(inning, 9));
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
